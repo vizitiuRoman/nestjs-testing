@@ -1,5 +1,4 @@
 import { HttpStatus } from '@nestjs/common';
-import { NestApplication } from '@nestjs/core';
 import {
   FastifyAdapter,
   NestFastifyApplication,
@@ -8,7 +7,6 @@ import { Test } from '@nestjs/testing';
 import { CreateUserInput } from '../dto/create-user.dto';
 import { UpdateUserInput } from '../dto/update-user.dto';
 import { UserDto } from '../dto/user.dto';
-import { IUserRepository } from '../interfaces/user.repository';
 import { REPOSITORY_USER_TOKEN } from '../user.constants';
 import { UserController } from '../user.controller';
 import { UserEntity } from '../user.entity';
@@ -53,6 +51,24 @@ describe('Test cases for user api', () => {
 
   afterEach(() => {
     userRepository.clearTestResults();
+  });
+
+  describe('Get users', () => {
+    it('should successfully return users', async () => {
+      userRepository.addUser({ ...userEntity, id: 1 });
+      userRepository.addUser({ ...userEntity, id: 2 });
+      userRepository.addUser({ ...userEntity, id: 3 });
+
+      const response = await app.inject({
+        method: 'GET',
+        url: '/users',
+      });
+      const usersDto: UserDto[] = response.json();
+
+      expect(response.statusCode).toBe(HttpStatus.OK);
+      expect(usersDto.length).toEqual(3);
+      expect(usersDto[0]).toMatchObject(userEntity);
+    });
   });
 
   describe('Get user by id', () => {
