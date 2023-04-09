@@ -8,7 +8,7 @@ An example of nestjs testing without using mocks
 
 Cases: 
 - successfully return user
-- should not find user
+- should not find a user
 
 ```typescript
 describe('Get user by id', () => {
@@ -50,7 +50,7 @@ Result
     Expected: 200
     Received: 404
 
-  ● Test cases for user api › Get user by id › should not find user
+  ● Test cases for user api › Get user by id › should not find a user
 
     expect(received).toEqual(expected) // deep equality
 
