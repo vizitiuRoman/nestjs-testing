@@ -72,7 +72,7 @@ describe('Test cases for user api', () => {
   });
 
   describe('Get user by id', () => {
-    it('should successfully return user', async () => {
+    it('should successfully return a user', async () => {
       userRepository.addUser(userEntity);
 
       const response = await app.inject({
@@ -85,7 +85,7 @@ describe('Test cases for user api', () => {
       expect(userDto).toMatchObject(userEntity);
     });
 
-    it('should not found user', async () => {
+    it('should not find a user', async () => {
       const response = await app.inject({
         method: 'GET',
         url: '/users/100',
@@ -97,7 +97,7 @@ describe('Test cases for user api', () => {
   });
 
   describe('Create user', () => {
-    it('should successfully create user', async () => {
+    it('should successfully create a user', async () => {
       const payload: CreateUserInput = {
         lastName: 'ro',
         name: 'ro',
@@ -116,7 +116,7 @@ describe('Test cases for user api', () => {
   });
 
   describe('Update user', () => {
-    it('should successfully update user', async () => {
+    it('should successfully update a user', async () => {
       userRepository.addUser(userEntity);
 
       const payload: UpdateUserInput = {
@@ -137,7 +137,7 @@ describe('Test cases for user api', () => {
   });
 
   describe('Delete user', () => {
-    it('should successfully delete user', async () => {
+    it('should successfully delete a user', async () => {
       userRepository.addUser(userEntity);
 
       const response = await app.inject({
@@ -148,7 +148,7 @@ describe('Test cases for user api', () => {
       expect(response.statusCode).toBe(HttpStatus.OK);
     });
 
-    it('should not found user', async () => {
+    it('should not find a user', async () => {
       const response = await app.inject({
         method: 'DELETE',
         url: '/users/500',
