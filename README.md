@@ -8,11 +8,11 @@ An example of nestjs testing without using mocks
 
 Cases: 
 - successfully return user
-- should not found user
+- should not find user
 
 ```typescript
 describe('Get user by id', () => {
-  it('should successfully return user', async () => {
+  it('should successfully return a user', async () => {
     userRepository.addUser(userEntity);
 
     const response = await app.inject({
@@ -25,7 +25,7 @@ describe('Get user by id', () => {
     expect(userDto).toMatchObject(userEntity);
   });
 
-  it('should not found user', async () => {
+  it('should not find a user', async () => {
     const response = await app.inject({
       method: 'GET',
       url: '/users/100',
@@ -50,7 +50,7 @@ Result
     Expected: 200
     Received: 404
 
-  ● Test cases for user api › Get user by id › should not found user
+  ● Test cases for user api › Get user by id › should not find user
 
     expect(received).toEqual(expected) // deep equality
 
